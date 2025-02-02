@@ -35,11 +35,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.todoapp.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ForgotPasswordPage(){
+fun ForgotPasswordPage(navController: NavController){
     var email by remember { mutableStateOf("") }
 
     Column(

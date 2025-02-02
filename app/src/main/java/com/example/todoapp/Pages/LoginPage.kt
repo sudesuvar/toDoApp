@@ -39,14 +39,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.todoapp.AuthState
 import com.example.todoapp.AuthViewModel
 import com.example.todoapp.R
+import com.example.todoapp.Routes
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginPage(viewModel: AuthViewModel){
+fun LoginPage(navController: NavController, viewModel: AuthViewModel,){
 
     val authState = viewModel.authState.observeAsState()
     var email by remember { mutableStateOf("") }
@@ -57,7 +59,7 @@ fun LoginPage(viewModel: AuthViewModel){
     LaunchedEffect(authState.value) {
         when (val currentState = authState.value) {
             is AuthState.Authenticated -> {
-                //navController.navigate(Routes.mainScreen)
+                navController.navigate(Routes.TodoListPage)
             }
             is AuthState.Error -> {
                 Toast.makeText(context, currentState.message, Toast.LENGTH_SHORT).show()

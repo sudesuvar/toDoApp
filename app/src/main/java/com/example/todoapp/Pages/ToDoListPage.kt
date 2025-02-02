@@ -31,6 +31,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.todoapp.R
 import com.example.todoapp.ToDo
 import com.example.todoapp.TodoViewModel
@@ -39,7 +40,7 @@ import java.util.Locale
 
 
 @Composable
-fun TodoListPage(viewModel: TodoViewModel){
+fun TodoListPage(navController: NavController, viewModel: TodoViewModel){
 
     val todoList by viewModel.todoList.observeAsState()
     var inputText by remember {

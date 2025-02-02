@@ -13,7 +13,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.todoapp.Pages.ForgotPasswordPage
 import com.example.todoapp.Pages.LoginPage
 import com.example.todoapp.Pages.SignupPage
 import com.example.todoapp.ui.theme.ToDoAppTheme
@@ -26,10 +28,21 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ToDoAppTheme {
-                //TodoListPlage(todoViewModel)
-                SignupPage(viewModel = AuthViewModel())
-                LoginPage(viewModel = AuthViewModel())
-                //ForgotPasswordPage()
+                val navController = rememberNavController()
+                NavHost(navController = navController, startDestination = Routes.loginPage, builder = {
+                    composable(Routes.loginPage,) {
+                        LoginPage(navController, viewModel = AuthViewModel())
+                    }
+                    composable(Routes.signupPage,) {
+                        SignupPage(navController, viewModel = AuthViewModel())
+                    }
+                    composable(Routes.forgotPasswordPage,) {
+                        ForgotPasswordPage(navController)
+                    }
+                    composable(Routes.TodoListPage,) {
+                        TodoListPage(navController , viewModel = todoViewModel)
+                    }
+                })
             }
         }
     }
