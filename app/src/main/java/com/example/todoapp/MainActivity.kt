@@ -12,6 +12,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.rememberNavController
+import com.example.todoapp.Pages.LoginPage
+import com.example.todoapp.Pages.SignupPage
 import com.example.todoapp.ui.theme.ToDoAppTheme
 import np.com.bimalkafle.todoapp.TodoListPage
 
@@ -22,9 +26,9 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ToDoAppTheme {
-                TodoListPage(todoViewModel)
-                //SignupPage()
-                //LoginPage()
+                //TodoListPlage(todoViewModel)
+                SignupPage(viewModel = AuthViewModel())
+                LoginPage(viewModel = AuthViewModel())
                 //ForgotPasswordPage()
             }
         }

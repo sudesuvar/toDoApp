@@ -1,5 +1,6 @@
-package com.example.todoapp
+package com.example.todoapp.Pages
 
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -38,29 +39,32 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.todoapp.AuthState
+import com.example.todoapp.AuthViewModel
+import com.example.todoapp.R
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginPage(){
+fun LoginPage(viewModel: AuthViewModel){
 
-    //val authState = viewModel.authState.observeAsState()
+    val authState = viewModel.authState.observeAsState()
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var confirmPassword by remember { mutableStateOf("") }
     val context = LocalContext.current
 
-    /*LaunchedEffect(authState.value) {
+    LaunchedEffect(authState.value) {
         when (val currentState = authState.value) {
             is AuthState.Authenticated -> {
-                navController.navigate(Routes.mainScreen)
+                //navController.navigate(Routes.mainScreen)
             }
             is AuthState.Error -> {
                 Toast.makeText(context, currentState.message, Toast.LENGTH_SHORT).show()
             }
             else -> Unit // Başka bir durum için işlem yapılmıyor
         }
-    }*/
+    }
 
     Column(
         modifier = Modifier.fillMaxSize().paint(
@@ -116,7 +120,8 @@ fun LoginPage(){
         Spacer(modifier =  Modifier.height(36.dp))
 
         Button(onClick ={
-            //Log.i("Credential", "Email : $email Password : $password")
+            Log.i("Credential", "Email : $email Password : $password")
+            viewModel.login(email, password)
         },  colors = ButtonDefaults.buttonColors(
             containerColor = colorResource(R.color.green),
             contentColor = colorResource(R.color.white)),
