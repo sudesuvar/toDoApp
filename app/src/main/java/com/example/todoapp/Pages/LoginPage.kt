@@ -142,6 +142,7 @@ fun LoginPage(navController: NavController, viewModel: AuthViewModel,){
         Spacer(modifier =  Modifier.height(16.dp))
 
         Text(text = "Bir Hesap Oluştur." , modifier = Modifier.clickable {
+            navController.navigate(Routes.signupPage)
         })
 
         Spacer(modifier =  Modifier.height(32.dp))
